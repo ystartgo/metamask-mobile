@@ -74,6 +74,7 @@ class Engine {
    */
   constructor(initialState = {}, initialKeyringState) {
     if (!Engine.instance) {
+      console.log('Engine', 'creating a new engine instance');
       const preferencesController = new PreferencesController(
         {},
         {

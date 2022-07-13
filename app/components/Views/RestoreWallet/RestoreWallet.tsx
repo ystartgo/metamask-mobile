@@ -33,6 +33,7 @@ const RestoreWallet = () => {
   const { navigate } = useNavigation();
 
   const handleOnNext = useCallback(async () => {
+    console.log('handleNext');
     setLoading(true);
     const restoreResult = await EngineService.initializeVaultFromBackup();
     if (restoreResult.success) {

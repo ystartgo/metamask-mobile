@@ -87,6 +87,7 @@ class EngineService {
    * @param store - Redux store
    */
   async initializeVaultFromBackup(): Promise<InitializeEngineResult> {
+    console.log('EngineService', 'initializeVaultFromBackup');
     const keyringState = await getVaultFromBackup();
     const reduxState = importedStore.getState?.();
     const state = reduxState?.engine?.backgroundState || {};

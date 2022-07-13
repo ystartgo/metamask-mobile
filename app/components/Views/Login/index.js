@@ -49,7 +49,7 @@ import {
   LOGIN_PASSWORD_ERROR,
   RESET_WALLET_ID,
 } from '../../../constants/test-ids';
-import { createRestoreWalletNavDetails } from '../RestoreWallet';
+import { createRestoreWalletNavDetails } from '../RestoreWallet/RestoreWallet';
 
 const deviceHeight = Device.getDeviceHeight();
 const breakPoint = deviceHeight < 700;
