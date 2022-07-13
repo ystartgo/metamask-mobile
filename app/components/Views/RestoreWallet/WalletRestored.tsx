@@ -11,8 +11,10 @@ import { createNavigationDetails } from '../../../util/navigation/navUtils';
 import Routes from '../../../constants/navigation/Routes';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useDispatch } from 'react-redux';
-import { logIn } from '../../../actions/user';
+import { logIn, logOut } from '../../../actions/user';
 import { useNavigation } from '@react-navigation/native';
+import Engine from '../../../core/Engine';
+import SecureKeychain from '../../../core/SecureKeychain';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const onboardingDeviceImage = require('../../../images/swaps_onboard_device.png');
@@ -25,11 +27,25 @@ const WalletRestored = () => {
   const dispatch = useDispatch();
   const styles = createStyles();
   const navigation = useNavigation();
-  // const userLoggedIn = useSelector()
+
   const handleOnNext = useCallback(async () => {
-    console.log('WalletRestored login');
-    dispatch(logIn());
-    navigation.replace('HomeNav');
+    const credentials = await SecureKeychain.getGenericPassword();
+    if (credentials) {
+      const { KeyringController } = Engine.context as any;
+      try {
+        await KeyringController.submitPassword(credentials.password);
+        // Only way to land back on Login is to log out, which clears credentials (meaning we should not show biometric button)
+        console.log('WalletRestored login');
+        dispatch(logIn());
+        navigation.replace('HomeNav');
+      } catch (error) {
+        console.log('WalletRestored not logged in', error);
+        dispatch(logOut());
+      }
+    } else {
+      console.log('WalletRestored no credentials');
+      dispatch(logOut());
+    }
   }, [dispatch, navigation]);
 
   return (

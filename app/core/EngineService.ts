@@ -92,6 +92,8 @@ class EngineService {
     const reduxState = importedStore.getState?.();
     const state = reduxState?.engine?.backgroundState || {};
     const Engine = UntypedEngine as any;
+    // This ensures we create an entirely new engine
+    Engine.destroyEngine();
     if (keyringState) {
       const instance = Engine.init(state, keyringState);
       if (instance) {

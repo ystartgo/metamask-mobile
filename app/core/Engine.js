@@ -778,6 +778,12 @@ class Engine {
 
     return true;
   };
+
+  destroyEngineInstance() {
+    console.log('destroyEngine');
+    this.resetState();
+    Engine.instance = null;
+  }
 }
 
 let instance: Engine;
@@ -858,6 +864,12 @@ export default {
   resetState() {
     return instance.resetState();
   },
+
+  destroyEngine() {
+    instance && instance.destroyEngineInstance();
+    instance = null;
+  },
+
   sync(data: any) {
     return instance.sync(data);
   },
