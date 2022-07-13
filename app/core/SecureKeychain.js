@@ -84,6 +84,7 @@ export default {
 
   async getGenericPassword() {
     if (instance) {
+      console.log('SecureKeychain getGenericPassword');
       instance.isAuthenticating = true;
       const keychainObject = await Keychain.getGenericPassword(defaultOptions);
       if (keychainObject.password) {
@@ -95,6 +96,7 @@ export default {
       }
       instance.isAuthenticating = false;
     }
+    console.log('SecureKeychain getGenericPassword no instance');
     return null;
   },
 
