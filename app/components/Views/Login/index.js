@@ -50,6 +50,8 @@ import {
   RESET_WALLET_ID,
 } from '../../../constants/test-ids';
 import { createRestoreWalletNavDetails } from '../RestoreWallet/RestoreWallet';
+import { parseVaultValue } from '../../../util/validators';
+import { getVaultFromBackup } from '../../../core/backupVault';
 
 const deviceHeight = Device.getDeviceHeight();
 const breakPoint = deviceHeight < 700;
@@ -341,6 +343,7 @@ class Login extends PureComponent {
       this.setState({ loading: true, error: null });
       const { KeyringController } = Engine.context;
       // Restore vault with user entered password
+      throw new Error('Cannot unlock without a previous vault.');
       await KeyringController.submitPassword(this.state.password);
       const encryptionLib = await AsyncStorage.getItem(ENCRYPTION_LIB);
       const existingUser = await AsyncStorage.getItem(EXISTING_USER);
@@ -413,7 +416,25 @@ class Login extends PureComponent {
         });
         // navigate to recovery flow
         const { navigation } = this.props;
-        navigation.navigate(...createRestoreWalletNavDetails());
+
+        const keyringState = await getVaultFromBackup();
+
+        if (keyringState.vault) {
+          console.log({keyringState});
+          const vaultSeed = await parseVaultValue(
+            this.state.password,
+            keyringState.vault.toString(),
+          );
+
+          if (vaultSeed) {
+            // set
+            await SecureKeychain.setGenericPassword(
+              this.state.password,
+              SecureKeychain.TYPES.REMEMBER_ME,
+            );
+            navigation.navigate(...createRestoreWalletNavDetails());
+          }
+        }
       } else {
         this.setState({ loading: false, error });
       }
