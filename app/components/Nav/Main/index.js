@@ -1,10 +1,12 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-
+import { InAppBrowser } from 'react-native-inappbrowser-reborn';
 import {
   ActivityIndicator,
   AppState,
   StyleSheet,
   View,
+  Text,
+  Button,
   PushNotificationIOS, // eslint-disable-line react-native/split-platform-components
 } from 'react-native';
 import NetInfo from '@react-native-community/netinfo';
@@ -265,6 +267,155 @@ const Main = (props) => {
         ) : (
           renderLoader()
         )}
+        <View style={{ padding: 20, backgroundColor: '#ffff' }}>
+          <Text>Testing InApp Browser</Text>
+          <Button
+            title="Open Browser auth transak"
+            onPress={async () => {
+              if (!(await InAppBrowser.isAvailable())) {
+                return;
+              }
+              try {
+                const result = await InAppBrowser.openAuth(
+                  'https://transak.com/',
+                  'metamask://',
+                );
+                console.log(result);
+              } catch (error) {
+                console.log(error);
+              } finally {
+                InAppBrowser.closeAuth();
+              }
+            }}
+          />
+          <Button
+            title="Open Browser auth paypal"
+            onPress={async () => {
+              if (!(await InAppBrowser.isAvailable())) {
+                return;
+              }
+              try {
+                const result = await InAppBrowser.openAuth(
+                  'https://paypal.com/',
+                  'metamask://',
+                );
+                console.log(result);
+              } catch (error) {
+                console.log(error);
+              } finally {
+                InAppBrowser.closeAuth();
+              }
+            }}
+          />
+          <Button
+            title="Open Browser  paypal"
+            onPress={async () => {
+              if (!(await InAppBrowser.isAvailable())) {
+                return;
+              }
+              try {
+                const result = await InAppBrowser.open('https://paypal.com/');
+                console.log(result);
+              } catch (error) {
+                console.log(error);
+              } finally {
+              }
+            }}
+          />
+          <Button
+            title="Open Browser WITHOUT AUTH"
+            onPress={async () => {
+              if (!(await InAppBrowser.isAvailable())) {
+                return;
+              }
+              try {
+                const result = await InAppBrowser.open(
+                  'https://g37goi.csb.app/',
+                );
+                console.log(result);
+              } catch (error) {
+                console.log(error);
+              }
+            }}
+          />
+          <Button
+            title="Open Browser handle randomapp"
+            onPress={async () => {
+              if (!(await InAppBrowser.isAvailable())) {
+                return;
+              }
+              try {
+                const result = await InAppBrowser.openAuth(
+                  'https://g37goi.csb.app/',
+                  'randomapp://no/need/to/match',
+                );
+                console.log(result);
+              } catch (error) {
+                console.log(error);
+              } finally {
+                InAppBrowser.closeAuth();
+              }
+            }}
+          />
+
+          <Button
+            title="Open Browser handle otherrandommapp"
+            onPress={async () => {
+              if (!(await InAppBrowser.isAvailable())) {
+                return;
+              }
+              try {
+                const result = await InAppBrowser.openAuth(
+                  'https://g37goi.csb.app/',
+                  'otherrandommapp://no/need/to/match',
+                );
+                console.log(result);
+              } catch (error) {
+                console.log(error);
+              } finally {
+                InAppBrowser.closeAuth();
+              }
+            }}
+          />
+          <Button
+            title="Open Browser handle dapp"
+            onPress={async () => {
+              if (!(await InAppBrowser.isAvailable())) {
+                return;
+              }
+              try {
+                const result = await InAppBrowser.openAuth(
+                  'https://g37goi.csb.app/',
+                  'dapp://no/need/to/match',
+                );
+                console.log(result);
+              } catch (error) {
+                console.log(error);
+              } finally {
+                InAppBrowser.closeAuth();
+              }
+            }}
+          />
+          <Button
+            title="Open Browser handle anything"
+            onPress={async () => {
+              if (!(await InAppBrowser.isAvailable())) {
+                return;
+              }
+              try {
+                const result = await InAppBrowser.openAuth(
+                  'https://g37goi.csb.app/',
+                  'anything://no/need/to/match',
+                );
+                console.log(result);
+              } catch (error) {
+                console.log(error);
+              } finally {
+                InAppBrowser.closeAuth();
+              }
+            }}
+          />
+        </View>
         <GlobalAlert />
         <FadeOutOverlay />
         <Notification navigation={props.navigation} />

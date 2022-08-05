@@ -38,6 +38,7 @@ import { useTheme } from '../../../../util/theme';
 import { Colors } from '../../../../util/theme/models';
 import { PROVIDER_LINKS } from '../types';
 import useAnalytics from '../hooks/useAnalytics';
+import InAppBrowser from 'react-native-inappbrowser-reborn';
 
 // TODO: Convert into typescript and correctly type
 const Text = BaseText as any;
@@ -437,8 +438,18 @@ const GetQuotes = () => {
   );
 
   const handleOnPressBuy = useCallback(
-    (quote, index) => {
-      quote?.provider?.id && navigation.navigate('Checkout', { ...quote });
+    async (quote: QuoteResponse, index) => {
+      if (!(await InAppBrowser.isAvailable())) {
+        quote?.provider?.id && navigation.navigate('Checkout', { ...quote });
+      } else {
+        try {
+          const result = await InAppBrowser.open(quote.buyURL as string);
+          console.log(result);
+        } catch (error) {
+          console.log(error);
+        }
+      }
+
       const totalFee =
         (quote.networkFee || 0) +
         (quote.providerFee || 0) +
