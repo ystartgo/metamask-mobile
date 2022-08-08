@@ -65,6 +65,8 @@ const createStyles = (colors) =>
     },
   });
 
+const testURL = 'https://g37goi.csb.app/';
+
 const Main = (props) => {
   const [connected, setConnected] = useState(true);
   const [forceReload, setForceReload] = useState(false);
@@ -308,7 +310,7 @@ const Main = (props) => {
             }}
           />
           <Button
-            title="Open Browser  paypal"
+            title="Open Browser paypal"
             onPress={async () => {
               if (!(await InAppBrowser.isAvailable())) {
                 return;
@@ -318,7 +320,6 @@ const Main = (props) => {
                 console.log(result);
               } catch (error) {
                 console.log(error);
-              } finally {
               }
             }}
           />
@@ -329,9 +330,7 @@ const Main = (props) => {
                 return;
               }
               try {
-                const result = await InAppBrowser.open(
-                  'https://g37goi.csb.app/',
-                );
+                const result = await InAppBrowser.open(testURL);
                 console.log(result);
               } catch (error) {
                 console.log(error);
@@ -346,7 +345,7 @@ const Main = (props) => {
               }
               try {
                 const result = await InAppBrowser.openAuth(
-                  'https://g37goi.csb.app/',
+                  testURL,
                   'randomapp://no/need/to/match',
                 );
                 console.log(result);
@@ -366,7 +365,7 @@ const Main = (props) => {
               }
               try {
                 const result = await InAppBrowser.openAuth(
-                  'https://g37goi.csb.app/',
+                  testURL,
                   'otherrandommapp://no/need/to/match',
                 );
                 console.log(result);
@@ -385,7 +384,7 @@ const Main = (props) => {
               }
               try {
                 const result = await InAppBrowser.openAuth(
-                  'https://g37goi.csb.app/',
+                  testURL,
                   'dapp://no/need/to/match',
                 );
                 console.log(result);
@@ -404,7 +403,7 @@ const Main = (props) => {
               }
               try {
                 const result = await InAppBrowser.openAuth(
-                  'https://g37goi.csb.app/',
+                  testURL,
                   'anything://no/need/to/match',
                 );
                 console.log(result);
