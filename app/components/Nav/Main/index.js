@@ -63,6 +63,8 @@ const createStyles = (colors) =>
       justifyContent: 'center',
       alignItems: 'center',
     },
+    // eslint-disable-next-line react-native/no-color-literals
+    dummyStyle: { padding: 20, backgroundColor: '#ffff' },
   });
 
 const testURL = 'https://g37goi.csb.app/';
@@ -269,7 +271,7 @@ const Main = (props) => {
         ) : (
           renderLoader()
         )}
-        <View style={{ padding: 20, backgroundColor: '#ffff' }}>
+        <View style={styles.dummyStyle}>
           <Text>Testing InApp Browser</Text>
           <Button
             title="Open Browser auth transak"
@@ -278,13 +280,14 @@ const Main = (props) => {
                 return;
               }
               try {
-                const result = await InAppBrowser.openAuth(
+                //const result =
+                await InAppBrowser.openAuth(
                   'https://transak.com/',
                   'metamask://',
                 );
-                console.log(result);
+                // console.log(result);
               } catch (error) {
-                console.log(error);
+                // console.log(error);
               } finally {
                 InAppBrowser.closeAuth();
               }
@@ -297,13 +300,14 @@ const Main = (props) => {
                 return;
               }
               try {
-                const result = await InAppBrowser.openAuth(
+                //const result =
+                await InAppBrowser.openAuth(
                   'https://paypal.com/',
                   'metamask://',
                 );
-                console.log(result);
+                // console.log(result);
               } catch (error) {
-                console.log(error);
+                // console.log(error);
               } finally {
                 InAppBrowser.closeAuth();
               }
@@ -316,10 +320,11 @@ const Main = (props) => {
                 return;
               }
               try {
-                const result = await InAppBrowser.open('https://paypal.com/');
-                console.log(result);
+                //const result =
+                await InAppBrowser.open('https://paypal.com/');
+                // console.log(result);
               } catch (error) {
-                console.log(error);
+                // console.log(error);
               }
             }}
           />
@@ -330,10 +335,11 @@ const Main = (props) => {
                 return;
               }
               try {
-                const result = await InAppBrowser.open(testURL);
-                console.log(result);
+                //const result =
+                await InAppBrowser.open(testURL);
+                // console.log(result);
               } catch (error) {
-                console.log(error);
+                // console.log(error);
               }
             }}
           />
@@ -344,13 +350,14 @@ const Main = (props) => {
                 return;
               }
               try {
-                const result = await InAppBrowser.openAuth(
+                //const result =
+                await InAppBrowser.openAuth(
                   testURL,
                   'randomapp://no/need/to/match',
                 );
-                console.log(result);
+                // console.log(result);
               } catch (error) {
-                console.log(error);
+                // console.log(error);
               } finally {
                 InAppBrowser.closeAuth();
               }
@@ -364,13 +371,14 @@ const Main = (props) => {
                 return;
               }
               try {
-                const result = await InAppBrowser.openAuth(
+                //const result =
+                await InAppBrowser.openAuth(
                   testURL,
                   'otherrandommapp://no/need/to/match',
                 );
-                console.log(result);
+                // console.log(result);
               } catch (error) {
-                console.log(error);
+                // console.log(error);
               } finally {
                 InAppBrowser.closeAuth();
               }
@@ -383,13 +391,11 @@ const Main = (props) => {
                 return;
               }
               try {
-                const result = await InAppBrowser.openAuth(
-                  testURL,
-                  'dapp://no/need/to/match',
-                );
-                console.log(result);
+                //const result =
+                await InAppBrowser.openAuth(testURL, 'dapp://no/need/to/match');
+                // console.log(result);
               } catch (error) {
-                console.log(error);
+                // console.log(error);
               } finally {
                 InAppBrowser.closeAuth();
               }
@@ -402,13 +408,14 @@ const Main = (props) => {
                 return;
               }
               try {
-                const result = await InAppBrowser.openAuth(
+                //const result =
+                await InAppBrowser.openAuth(
                   testURL,
                   'anything://no/need/to/match',
                 );
-                console.log(result);
+                // console.log(result);
               } catch (error) {
-                console.log(error);
+                // console.log(error);
               } finally {
                 InAppBrowser.closeAuth();
               }

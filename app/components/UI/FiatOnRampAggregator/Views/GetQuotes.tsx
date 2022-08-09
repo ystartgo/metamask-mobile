@@ -443,10 +443,11 @@ const GetQuotes = () => {
         quote?.provider?.id && navigation.navigate('Checkout', { ...quote });
       } else {
         try {
-          const result = await InAppBrowser.open(quote.buyURL as string);
-          console.log(result);
+          // const result =
+          await InAppBrowser.open(quote.buyURL as string);
+          // console.log(result);
         } catch (error) {
-          console.log(error);
+          // console.log(error);
         }
       }
 
