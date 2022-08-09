@@ -540,7 +540,7 @@ const GetQuotes = () => {
     return (
       <ScreenLayout>
         <ScreenLayout.Body>
-          <ErrorViewWithReporting error={sdkError} />
+          <ErrorViewWithReporting error={sdkError} location={'Quotes Screen'} />
         </ScreenLayout.Body>
       </ScreenLayout>
     );
@@ -552,6 +552,7 @@ const GetQuotes = () => {
       <ErrorView
         description={ErrorFetchingQuotes}
         ctaOnPress={handleFetchQuotes}
+        location={'Quotes Screen'}
       />
     );
   }
@@ -609,6 +610,7 @@ const GetQuotes = () => {
           'fiat_on_ramp_aggregator.try_different_amount_to_buy_input',
         )}
         ctaOnPress={() => navigation.goBack()}
+        location={'Quotes Screen'}
       />
     );
   }
