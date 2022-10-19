@@ -954,6 +954,7 @@ class NetworkSettings extends PureComponent {
                 tabLabel={strings(
                   'app_settings.custom_network_name',
                 ).toUpperCase()}
+                testID={'custom_networks_name'}
                 key={AppConstants.ADD_CUSTOM_NETWORK_CUSTOM_TAB_ID}
               >
                 {this.customNetwork()}
