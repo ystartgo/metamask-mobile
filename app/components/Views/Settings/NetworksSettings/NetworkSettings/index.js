@@ -7,6 +7,7 @@ import {
   TextInput,
   SafeAreaView,
   Linking,
+  Platform
 } from 'react-native';
 import { connect } from 'react-redux';
 import { fontStyles } from '../../../../../styles/common';
@@ -49,6 +50,8 @@ import {
 import hideKeyFromUrl from '../../../../../util/hideKeyFromUrl';
 import { themeAppearanceLight } from '../../../../../constants/storage';
 import CustomNetwork from './CustomNetworkView/CustomNetwork';
+import generateTestId from '../../../../../../wdio/utils/generateTestId';
+import { POPULAR_NETWORKS_TAB, CUSTOM_NETWORKS_TAB } from '../../../../../../wdio/features/testIDs/Screens/LoggedIntoWallet.testid';
 
 const createStyles = (colors) =>
   StyleSheet.create({
@@ -940,6 +943,8 @@ class NetworkSettings extends PureComponent {
                 tabLabel={strings('app_settings.popular').toUpperCase()}
                 key={AppConstants.ADD_CUSTOM_NETWORK_POPULAR_TAB_ID}
                 style={styles.networksWrapper}
+                accessibilityLabel={'popular_networks'}
+                {...generateTestId(Platform, POPULAR_NETWORKS_TAB)}
               >
                 <CustomNetwork
                   isNetworkModalVisible={this.state.showPopularNetworkModal}
@@ -948,13 +953,13 @@ class NetworkSettings extends PureComponent {
                   toggleWarningModal={this.toggleWarningModal}
                   showNetworkModal={this.showNetworkModal}
                   switchTab={this.tabView}
+                  //{...generateTestId(Platform, CUSTOM_NETWORKS_TAB)}
                 />
               </View>
               <View
                 tabLabel={strings(
                   'app_settings.custom_network_name',
                 ).toUpperCase()}
-                testID={'custom_networks_name'}
                 key={AppConstants.ADD_CUSTOM_NETWORK_CUSTOM_TAB_ID}
               >
                 {this.customNetwork()}

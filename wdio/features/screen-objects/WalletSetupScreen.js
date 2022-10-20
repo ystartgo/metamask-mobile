@@ -12,7 +12,8 @@ import {
   REMIND_LATER_BUTTON,
   SKIP_BACKUP_TEXT,
   SKIP_BUTTON,
-  WALLET_WELCOME_BOX
+  WALLET_WELCOME_BOX,
+  NO_THANKS_BUTTON_ID
 } from '../testIDs/Screens/WalletSetupScreen.testIds';
 import Gestures from '../helpers/Gestures';
 import Selectors from '../helpers/Selectors';
@@ -93,6 +94,9 @@ class WalletSetupScreen {
     return Selectors.getElementByPlatform(SECURE_WALLET_SCREEN);
   }
   
+  get noThanksButton(){
+    return Selectors.getElementByPlatform(NO_THANKS_BUTTON_ID);
+  }
 // functions and assertions ======================================
   
   async verifyScreenTitle() {
@@ -125,6 +129,10 @@ class WalletSetupScreen {
 
   async tapAgreeDataGathering(){
     await Gestures.tap(this.agreeButton);
+ }
+
+ async clickSeedButton(){
+  await Gestures.tap(this.seedButton)
  }
 // Assert password input field for new account
  async assertNewAccountScreenFields(){
@@ -169,6 +177,11 @@ async proceedWithoutWalletSecure(){
 
 async assertNewWalletWelcomeTutorial(){
   await expect(this.newWalletWelcomeTutorial).toBeDisplayed()
+}
+
+async clickNoThanksOnWelcomeWizard(){
+  await expect(this.newWalletWelcomeTutorial).toBeDisplayed()
+  await Gestures.tap(this.noThanksButton)
 }
 
 }

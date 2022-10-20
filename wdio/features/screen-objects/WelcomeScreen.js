@@ -57,4 +57,6 @@ class WelcomeScreen {
   }
 }
 
+
+
 export default new WelcomeScreen();

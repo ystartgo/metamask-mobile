@@ -1,14 +1,21 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { TouchableOpacity, View, StyleSheet, Text } from 'react-native';
+import {
+  TouchableOpacity,
+  View,
+  StyleSheet,
+  Text,
+  Platform,
+} from 'react-native';
 import { fontStyles, colors as importedColors } from '../../../styles/common';
 import Networks from '../../../util/networks';
 import { toggleNetworkModal } from '../../../actions/modals';
 import { strings } from '../../../../locales/i18n';
 import Device from '../../../util/device';
 import { ThemeContext, mockTheme } from '../../../util/theme';
-
+import generateTestId from '../../../../wdio/utils/generateTestId';
+import { NAVBAR_TITLE_BTN } from '../../../../wdio/features/testIDs/Screens/LoggedIntoWallet.testid';
 const createStyles = (colors) =>
   StyleSheet.create({
     wrapper: {
@@ -115,6 +122,7 @@ class NavbarTitle extends PureComponent {
         style={styles.wrapper}
         activeOpacity={this.props.disableNetwork ? 1 : 0.2}
         testID={'open-networks-button'}
+        {...generateTestId(Platform, NAVBAR_TITLE_BTN)}
       >
         {title ? (
           <Text numberOfLines={1} style={styles.title}>

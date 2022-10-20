@@ -27,5 +27,9 @@ export const WALLET_SETUP_CREATE_NEW_WALLET_BUTTON_ID =
   'onboarding-wizard-step1-container-id';
   export const SKIP_ACCOUNT_SECURITY_MODAL =
   'skip_backup_warning';
+  export const NO_THANKS_BUTTON_ID =
+  'onboarding-wizard-back-button';
+
+  
   
   
