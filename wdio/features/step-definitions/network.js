@@ -6,6 +6,7 @@ import WalletMainScreen from '../screen-objects/WalletMainScreen.js';
 import WalletSetupScreen from '../screen-objects/WalletSetupScreen.js';
 import WelcomeScreen from '../screen-objects/WelcomeScreen.js';
 import LoggedInWalletScreen from '../screen-objects/LoggedInWalletScreen.js';
+import assert from 'assert';
 Given(/^I import wallet using seed phrase "([^"]*)?"/, async (phrase) => {
     await driver.pause(7000)
     // await WelcomeScreen.verifySplashScreen();
@@ -69,8 +70,14 @@ Given(/^I import wallet using seed phrase "([^"]*)?"/, async (phrase) => {
     });
 
     When(/^I should see the added network name "([^"]*)?" in the top navigation bar/, async (network) => {
-        let text = await $(`//android.view.ViewGroup[@content-desc="open-networks-button"]`).getText();
-        await expect(text == network)
+        //await expect($(`//android.view.ViewGroup[@content-desc="open-networks-button"]`)).toHaveAttribute('text',network);
+        //await expect($('~navbar-title-network')).toHaveAttribute('text',network);
+        //const test = await $('~open-networks-button');
+        // const test = await $(`//android.view.ViewGroup[@content-desc="open-networks-button"]`).getAttribute('text')
+        // console.log(test +' aaaaaaaaaaaaaaaaaaaaaaaaaaa '+ network)
+        //  assert.strictEqual(test.toHaveAttribute('text','Wallet'),true);
+        //await expect(text == network)
+        await $("new UISelector().text(\"Palm\")").toBeDisplayed()
       });
 
       Then(/^I am back to the wallet view/, async () => {
