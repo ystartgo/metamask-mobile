@@ -1,5 +1,5 @@
 import {
-  NAVBAR_TITLE_BTN,
+  NETWORKS_BUTTON_ID,
   ADD_NETWORK_BTN,
   POPULAR_NETWORKS_TAB,
   CUSTOM_NETWORKS_TAB,
@@ -13,7 +13,7 @@ class LoggedInWalletScreen {
 
   
   get navBarWalletBtn() {
-    return Selectors.getElementByPlatform(NAVBAR_TITLE_BTN, true);
+    return Selectors.getElementByPlatform(NETWORKS_BUTTON_ID, true);
   }
 
   get addNetworkBtn() {
@@ -37,8 +37,11 @@ class LoggedInWalletScreen {
       await Gestures.tap(this.navBarWalletBtn);
     }
 
-    async navbarNetworkTitle(containText){
-      await expect(this.networkTitle.getText()==containText) // TODO needs to be fixed
+    async isNetworkNameCorrect(network){
+    const textFromElement = await this.networkTitle
+    const networkName = await textFromElement.getText()
+
+      await expect(networkName).toContain(network) // TODO needs to be fixed
     }
 
   async clickAddNetworkBtn(){

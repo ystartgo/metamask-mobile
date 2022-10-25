@@ -15,7 +15,10 @@ import { strings } from '../../../../locales/i18n';
 import Device from '../../../util/device';
 import { ThemeContext, mockTheme } from '../../../util/theme';
 import generateTestId from '../../../../wdio/utils/generateTestId';
-import { NAVBAR_TITLE_BTN } from '../../../../wdio/features/testIDs/Screens/LoggedIntoWallet.testid';
+import {
+  NAVBAR_TITLE_NETWORK,
+  NETWORKS_BUTTON_ID,
+} from '../../../../wdio/features/testIDs/Screens/LoggedIntoWallet.testid';
 const createStyles = (colors) =>
   StyleSheet.create({
     wrapper: {
@@ -122,7 +125,7 @@ class NavbarTitle extends PureComponent {
         style={styles.wrapper}
         activeOpacity={this.props.disableNetwork ? 1 : 0.2}
         testID={'open-networks-button'}
-        {...generateTestId(Platform, NAVBAR_TITLE_BTN)}
+        {...generateTestId(Platform, NETWORKS_BUTTON_ID)}
       >
         {title ? (
           <Text numberOfLines={1} style={styles.title}>
@@ -140,6 +143,7 @@ class NavbarTitle extends PureComponent {
             numberOfLines={1}
             style={styles.networkName}
             testID={'navbar-title-network'}
+            {...generateTestId(Platform, NAVBAR_TITLE_NETWORK)}
           >
             {name}
           </Text>

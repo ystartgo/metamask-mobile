@@ -1,13 +1,21 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { TouchableOpacity, View, StyleSheet, Text, Image } from 'react-native';
+import {
+  TouchableOpacity,
+  View,
+  StyleSheet,
+  Text,
+  Image,
+  Platform,
+} from 'react-native';
 import { fontStyles } from '../../../styles/common';
 import Networks from '../../../util/networks';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Device from '../../../util/device';
 import { ThemeContext, mockTheme } from '../../../util/theme';
-
+import generateTestId from '../../../../wdio/utils/generateTestId';
+import { NAVBAR_TITLE_NETWORK } from '../../../../wdio/features/testIDs/Screens/LoggedIntoWallet.testid';
 const createStyles = (colors) =>
   StyleSheet.create({
     wrapper: {
@@ -153,6 +161,7 @@ class NavbarBrowserTitle extends PureComponent {
             numberOfLines={1}
             style={styles.networkName}
             testID={'navbar-title-network'}
+            {...generateTestId(Platform, NAVBAR_TITLE_NETWORK)}
           >
             {name}
           </Text>

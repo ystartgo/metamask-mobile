@@ -77,7 +77,9 @@ Given(/^I import wallet using seed phrase "([^"]*)?"/, async (phrase) => {
         // console.log(test +' aaaaaaaaaaaaaaaaaaaaaaaaaaa '+ network)
         //  assert.strictEqual(test.toHaveAttribute('text','Wallet'),true);
         //await expect(text == network)
-        await $("new UISelector().text(\"Palm\")").toBeDisplayed()
+
+        await LoggedInWalletScreen.isNetworkNameCorrect("Palm")
+
       });
 
       Then(/^I am back to the wallet view/, async () => {

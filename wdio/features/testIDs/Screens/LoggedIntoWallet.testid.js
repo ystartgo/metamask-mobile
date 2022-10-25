@@ -1,4 +1,4 @@
-export const NAVBAR_TITLE_BTN =
+export const NETWORKS_BUTTON_ID =
   'open-networks-button';
 
   export const ADD_NETWORK_BTN =
