@@ -36,6 +36,7 @@ const EditGasFee1559Update = ({
   gasOptions,
   primaryCurrency,
   chainId,
+  onChange,
   onCancel,
   onSave,
   error,
@@ -86,6 +87,7 @@ const EditGasFee1559Update = ({
     gasSelected: selectedOption,
     legacy: false,
     gasObject,
+    swapsParams,
   });
 
   const {
