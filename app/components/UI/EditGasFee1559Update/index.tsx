@@ -54,6 +54,7 @@ const EditGasFee1559Update = ({
   selectedGasObject,
   onlyGas,
   swapsParams,
+  initialSwapState,
 }: EditGasFee1559UpdateProps) => {
   const [modalInfo, updateModalInfo] = useState({
     isVisible: false,
@@ -73,6 +74,10 @@ const EditGasFee1559Update = ({
       selectedGasObject.suggestedMaxPriorityFeePerGas,
     suggestedGasLimit: selectedGasObject.suggestedGasLimit,
   });
+  const [swapsValue, setSwapsValue] = useState({
+    swapsGasEth: initialSwapState?.renderableGasFeeMinNative,
+    swapsMaxGasEth: initialSwapState?.renderableGasFeeMaxNative,
+  });
 
   const [
     isVisibleTimeEstimateInfoModal,
@@ -88,6 +93,7 @@ const EditGasFee1559Update = ({
     legacy: false,
     gasObject,
     swapsParams,
+    recommended,
   });
 
   const {
@@ -160,6 +166,12 @@ const EditGasFee1559Update = ({
   const changeGas = useCallback(
     (gas, option) => {
       setSelectedOption(option);
+      if (swapsParams) {
+        setSwapsValue({
+          swapsGasEth: renderableGasFeeMinNative,
+          swapsMaxGasEth: renderableGasFeeMaxNative,
+        });
+      }
       updateGasObject({
         ...gasObject,
         suggestedMaxFeePerGas: gas.suggestedMaxFeePerGas,
@@ -168,7 +180,13 @@ const EditGasFee1559Update = ({
       });
       onChange(option);
     },
-    [onChange, gasObject],
+    [
+      onChange,
+      gasObject,
+      renderableGasFeeMaxNative,
+      renderableGasFeeMinNative,
+      swapsParams,
+    ],
   );
 
   const changedGasLimit = useCallback(
@@ -636,20 +654,24 @@ const EditGasFee1559Update = ({
                   noMargin
                 >
                   ~
-                  {switchNativeCurrencyDisplayOptions(
-                    renderableGasFeeMinNative,
-                    renderableGasFeeMinConversion,
-                  )}
+                  {swapsParams
+                    ? swapsValue.swapsGasEth
+                    : switchNativeCurrencyDisplayOptions(
+                        renderableGasFeeMinNative,
+                        renderableGasFeeMinConversion,
+                      )}
                 </Text>
               </View>
               <Text big black style={styles.subheader} noMargin>
                 <Text bold black noMargin>
                   {strings('edit_gas_fee_eip1559.max_fee')}:{' '}
                 </Text>
-                {switchNativeCurrencyDisplayOptions(
-                  renderableGasFeeMaxNative,
-                  renderableGasFeeMaxConversion,
-                )}{' '}
+                {swapsParams
+                  ? swapsValue.swapsMaxGasEth
+                  : switchNativeCurrencyDisplayOptions(
+                      renderableGasFeeMaxNative,
+                      renderableGasFeeMaxConversion,
+                    )}{' '}
                 (
                 {switchNativeCurrencyDisplayOptions(
                   renderableGasFeeMaxConversion,
