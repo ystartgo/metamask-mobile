@@ -59,7 +59,7 @@ export default {
     WYRE_API_ENDPOINT_TEST: 'https://api.testwyre.com/',
     WYRE_MERCHANT_ID: 'merchant.io.metamask.wyre',
     WYRE_MERCHANT_ID_TEST: 'merchant.io.metamask.wyre.test',
-    POLLING_FREQUENCY: 10000,
+    POLLING_FREQUENCY: 5000,
   },
   DEEPLINKS: {
     ORIGIN_DEEPLINK: 'deeplink',
