@@ -133,6 +133,7 @@ const AccountSelector = ({ route }: AccountSelectorProps) => {
         key={ACCOUNT_LIST_ID}
         isLoading={isLoading}
         isRemoveAccountEnabled
+        testID={ACCOUNT_LIST_ID}
       />
       <View style={styles.sheet}>{renderSheetActions()}</View>
     </SheetBottom>
